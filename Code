@@ -1,0 +1,217 @@
+using System;
+using System.Timers;
+
+namespace DankMemer2.0
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Random rnd = new Random();
+            int wallet = 0;
+            int bank = 0;
+            int blackjackSum = 0;
+            int rarePepeCount = 0;
+            int tommyGunCount = 0;
+            int beg5050Win = 0;
+            int beg5050Lose = 0;
+            int allSearches = 0;
+            Console.WriteLine("Type 'Help' to get help or 'exit' to quit");
+            string lines = Console.ReadLine().ToLowerInvariant();
+            while (lines != "exit")
+            {
+                if (lines == "help")
+                {
+                    Console.WriteLine("");
+                    Console.WriteLine("Write 'htp' to learn how to play. \nWrite 'help' for other.");
+                    Console.WriteLine("");
+                    lines = Console.ReadLine().ToLowerInvariant();
+
+                    if (lines == "htp")
+                    {
+                        Console.WriteLine("");
+                        Console.WriteLine("How don't u know how to play, hah imagine beeing good :')");
+                        Console.WriteLine("Ok, fine");
+                        Console.WriteLine("");
+                        Console.WriteLine("How to play: \nWrite 'Balance' or 'Bal' to see your wallet and banks balance.");
+                        Console.WriteLine("Write 'Search' to search to get money and rarely an item.");
+                        Console.WriteLine("If you are a gambler, you can write 'Blackjack' or 'Poker' to maybe win some money.");
+                        Console.WriteLine("Or if you are poor, you can write 'Beg' to beg for money, and maybe get some more ;)");
+                        Console.WriteLine("If you want to buy something from the 'Shop' write 'shop buy' and then the thing!!");
+                        Console.WriteLine("Also... remember to claim your daily money with 'daily', you will get $25k!");
+                        Console.WriteLine("You can also write 'stats' to view some stats!");
+                    }
+                }
+                else if (lines == "stats")
+                {
+                    Console.WriteLine("");
+                    Console.WriteLine("---------------------------------------------------");
+                    Console.WriteLine($"You have won 50/50 {beg5050Win} times!");
+                    Console.WriteLine($"You have lost 50/50 {beg5050Lose} times!");
+                    Console.WriteLine($"You have searched something or someone {allSearches} times!");
+                    Console.WriteLine("---------------------------------------------------");
+                }
+                else if (lines == "search")
+                {
+                    Console.WriteLine("");
+                    Console.WriteLine("Where do you want to search?! \n'Dog' \n'Basement' \n'Bed'");
+                    lines = Console.ReadLine().ToLowerInvariant();
+                    int luckOrNot = rnd.Next(1, 10);
+
+                    if (lines == "basement")
+                    {
+                        Console.WriteLine("");
+                        int found = rnd.Next(1000, 3500);
+                        wallet += found;
+                        Console.WriteLine("Basement?");
+                        Console.WriteLine($"You found +${found} :/ ");
+                        allSearches++;
+                    }
+                    else if (lines == "bed")
+                    {
+                        Console.WriteLine("");
+                        int found = rnd.Next(1000, 3500);
+                        wallet += found;
+                        Console.WriteLine("Why do you have money here??!");
+                        Console.WriteLine($"You found +${found} :/ ");
+                        allSearches++;
+                    }
+                    else if (lines == "dog" && luckOrNot >= 3)
+                    {
+                        Console.WriteLine("");
+                        int found = rnd.Next(1000, 3500);
+                        wallet += found;
+                        Console.WriteLine("That poor poor dog :(");
+                        Console.WriteLine($"You found +${found} :/ ");
+                        allSearches++;
+                    }
+                    else if (lines == "dog" && luckOrNot == 1 || luckOrNot == 2)
+                    {
+                        Console.WriteLine("");
+                        Console.WriteLine("The dog bit you, and you got NOTHING. \nImagine what the dog thinks now... great!");
+                        allSearches++;
+                    }
+                }
+                else if (lines == "bal" || lines == "balance")
+                {
+                    Console.WriteLine("");
+                    Console.WriteLine($"You have ${wallet} in your wallet!");
+                    Console.WriteLine($"You have ${bank} in your bank!");
+                }
+                else if (lines == "poker")
+                {
+                    int poker = rnd.Next(1, 13);
+                }
+                else if (lines == "blackjack")
+                {
+                    int blackjack = rnd.Next(1, 13);
+                    Console.WriteLine("");
+                    Console.WriteLine($"You got the number {blackjack}, do you want to hit or stand? " +
+                        $"\nIf stand write 'Stand', if hit write 'Hit' :)");
+                    lines = Console.ReadLine().ToLowerInvariant();
+                    if (lines == "hit")
+                    {
+                        int blackjack2 = rnd.Next(1, 13);
+                        blackjackSum = blackjack + blackjack2;
+                        if (blackjackSum > 21)
+                        {
+                            Console.WriteLine("");
+                            Console.WriteLine("You STINK, u lost hah");
+                            Console.WriteLine("Write 'Blackjack' if u want to play again :/");
+                        }
+                        else if (blackjackSum <= 20)
+                        {
+                            Console.WriteLine();
+                            Console.WriteLine($"You got the number {blackjack2}, do you want to hit or stand? " +
+                                $"\nIf stand write 'Stand', if hit write 'Hit' :)");
+                            Console.WriteLine($"You now have {blackjackSum}!");
+                        }
+                        else if (blackjackSum == 21)
+                        {
+                            Console.WriteLine("");
+                            Console.WriteLine("You WON");
+                            Console.WriteLine($"You won $money");
+                        }
+                    }
+                    else if (lines == "stand")
+                    {
+                        //smthing
+                    }
+                }
+                else if (lines == $"dep")
+                {
+                    Console.WriteLine("");
+                    bank += wallet;
+                    wallet = 0;
+                }
+                else if (lines == "daily")
+                {
+                    Console.WriteLine("");
+                    Console.WriteLine("You got $25 000 in your wallet!");
+                    wallet += 25000;
+                }
+                else if (lines == "beg")
+                {
+                    int noMoneyFromBegging = rnd.Next(1, 10);
+                    if (noMoneyFromBegging == 1 || noMoneyFromBegging == 2 || noMoneyFromBegging == 3 
+                        || noMoneyFromBegging == 4 || noMoneyFromBegging == 5)
+                    {
+                        int beg = rnd.Next(600, 1500);
+                        wallet += beg;
+                        Console.WriteLine("");
+                        Console.WriteLine($"You got +${beg} from begging!");
+                        beg5050Win++;
+                    }
+                    else if (noMoneyFromBegging >= 6)
+                    {
+                        Console.WriteLine("");
+                        Console.WriteLine("LMAO... You got nothing, Haha");
+                        beg5050Lose++;
+                    }
+                }
+                else if (lines == "shop")
+                {
+                    Console.WriteLine("");
+                    Console.WriteLine("SHOP");
+                    Console.WriteLine("Buy 'Rare pepe' for $75 000!");
+                    Console.WriteLine("Buy 'Tommy Gun' for $500 000!");
+                }
+                else if (lines == "buy rare" && wallet >= 75000 || lines == "buy rare pepe" && wallet >= 75000)
+                {
+                    rarePepeCount += 1;
+                    wallet -= 75000;
+                    Console.WriteLine("");
+                    Console.WriteLine("You got 1 Rare pepe!");
+                    Console.WriteLine($"You now have {rarePepeCount} Rare pepe!");
+                }
+                else if (lines == "buy rare" && wallet <= 75000 || lines == "buy rare pepe" && wallet <= 75000)
+                {
+                    Console.WriteLine("You cant even afford a Rare Pepe, you must be BROKE!!!");
+                }
+                else if (lines == "buy tommy" && wallet >= 500000 || lines == "buy tommygun" && wallet >= 500000 
+                    || lines == "buy tommy gun" && wallet >= 500000)
+                {
+                    tommyGunCount += 1;
+                    if (tommyGunCount == 1)
+                    {
+                        Console.WriteLine("");
+                        Console.WriteLine("You got +1 Tommy gun!");
+                        Console.WriteLine($"You now have {tommyGunCount} Tommy gun!");
+                    }
+                    else if (tommyGunCount >= 2)
+                    {
+                        Console.WriteLine("");
+                        Console.WriteLine("You got +1 Tommy gun!");
+                        Console.WriteLine($"You now have {tommyGunCount} Tommy guns! Not that you need so many :/");
+                    }
+                }
+                else if (lines == "buy tommy" && wallet <= 500000 || lines == "buy tommygun" && wallet <= 500000
+                    || lines == "buy tommy gun" && wallet <= 500000)
+                {
+                    Console.WriteLine("U can't even afford a tommy gun! LMAO!!!");
+                }
+                lines = Console.ReadLine().ToLowerInvariant();
+            }
+        }
+    }
+}
